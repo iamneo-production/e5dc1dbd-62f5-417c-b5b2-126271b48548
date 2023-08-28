@@ -1,0 +1,31 @@
+server:
+  port: 9090
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  application:
+    name: TELECOM-APIGATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: CUSTOMER-SERVICE
+          uri: lb://CUSTOMER-SERVICE
+          predicates:
+            - Path=/customer/**
+        - id: INVENTORY-SERVICE
+          uri: lb://INVENTORY-SERVICE
+          predicates:
+            - Path=/inventory/**
+        - id: ORDER-SERVICE
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order/**
+        - id: BILLING-SERVICE
+          uri: lb://BILLING-SERVICE
+          predicates:
+            - Path=/billing/**
+
